@@ -1,2 +1,5 @@
 # modules
 /node_modules
+
+# Security
+lib/security/security.js
