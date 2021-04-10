@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html style="overflow: hidden">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+input[type=submit]:hover {
+background-color: #cf0c0c;
+transition: all .5s;
+}
+input[type=submit] {
+background-color: #e60f0f;
+transition: all .5s;
+}
+input[type=button]:hover {
+	transition: all .5s;
+background-color: #cf0c0c;
+}
+input[type=button] {
+background-color: #e60f0f;
+transition: all .5s;
+}
+button:hover {
+background-color: #cf0c0c;
+transition: all .5s;
+}
+button {
+background-color: #e60f0f;
+transition: all .5s;
+}
+input:hover {
+border: none; 
+border-bottom: 2px solid; 
+border-radius: 5px;
+border-color: #8ca1ff;
+transition: all .5s;
+color: #8ca1ff;
+}
+input {
+border: none; 
+border-bottom: 2px solid; 
+border-radius: 5px;
+transition: all .5s;
+border-color: #e60f0f;
+color: #e60f0f;
+}
+input[type=date]:hover {
+border: none; 
+border-bottom: 2px solid; 
+border-radius: 5px;
+transition: all .5s;
+border-color: #8ca1ff;
+color: #8ca1ff;
+}
+input[type=date] {
+border: none; 
+border-bottom: 2px solid; 
+border-radius: 5px;
+transition: all .5s;
+border-color: #e60f0f;
+color: #e60f0f;
+}
+select:hover {
+border: none; 
+transition: all .5s;
+border-bottom: 2px solid; 
+border-radius: 5px;
+border-color: #8ca1ff;
+color: #8ca1ff;
+}
+select {
+border: none; 
+border-bottom: 2px solid; 
+border-radius: 5px;
+transition: all .5s;
+border-color: #e60f0f;
+color: #e60f0f;
+}
+	@keyframes fadeOut{
+	0%{
+	font-size: 27px;
+	top: calc(50% - 20px);
+	color: #e60f0f;
+	}
+	100%{
+	font-size: 15px;
+	top: -10px;
+	color: #8ca1ff;
+	}
+}
+
+@keyframes fadeIn{
+	0%{
+	font-size: 15px;
+	top: -10px;
+	color: #8ca1ff;
+	}
+	100%{
+	font-size: 27px;
+	top: calc(50% - 20px);
+	color: #e60f0f;
+	}
+}
+
+@keyframes out{
+	0%{
+	color: blue;
+	font-size: 30px;
+	}
+	100%{
+	color: black;
+	font-size: 18px;
+	}
+}
+::-webkit-scrollbar {
+	width: 10px;
+}
+::-webkit-scrollbar-track {
+	background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+	background: #bfbfbf; 
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #a1a1a1; 
+}
+</style>
+</head>
+<body style="outline: none; margin: 0px; user-select: none; outline: none;">
+<div style="width: 100vw; height: 100vh; overflow: hidden;">
+	<div style="width: 100%; height: 50px; background-color: transparent;">
+	<button onclick="window.location='/book-a-flight'" style="border-top-left-radius: 10px; width: 25%; height: 100%; font-family: open sans; border: none;outline: none; color: white; border-right: 1px solid white">Book</button><!--
+	--><button onclick="window.location='/flightstatus'" style="width: 25%; height: 100%; font-family: open sans; border: none; color: white; outline: none; border-right: 1px solid white;">Flight status</button><!--
+	--><button onclick="window.location='/checkin'" style="width: 25%; height: 100%; font-family: open sans; outline: none; border: none; background-color: white;border-right: 1px solid white;">Check-in</button><!--
+	--><button onclick="window.location='/my-flights'" style="outline: none; border: none; color: white;border-right: 1px solid white; width: 25%; height: 100%; font-family: open sans; border-top-right-radius: 10px;">My Flights</button>
+	</div>
+		<div id="contents" style="text-align: center; width: 100%; height: calc(100% - 50px); border: 1px solid white; background-color: white;">
+	
+	<center>   
+		<div style="width: 90%; height: 400px;">
+	<p style="font-family: Open Sans; color: #e60f0f; font-size: 20px; margin-top: 30px; margin-bottom: 5px;">Confirm Check In for your flight?</p>
+	<br></br>
+	<b style="font-family: Open Sans; color: #e60f0f; font-size: 50px; margin-top: 20px; text">HSV-{{arrival}}</b><br></br>
+	<button type="button" style="display: inline-block; width: 110px; height: 35px; margin-top: 50px; border-radius: 10px; border: none; box-shadow: 0 0 20px rgba(230, 15, 15, 0.4); color: white; font-family: Open Sans;" onclick="approveCheck()">YES</button>
+	<button type="button" style="display: inline-block;width: 110px; height: 35px; border-radius: 10px; border: none; box-shadow: 0 0 20px rgba(230, 15, 15, 0.4); color: white; font-family: Open Sans;" onclick="window.location='/my-flights'">NO</button>
+</div>
+	</center>
+	</div>
+</div>
+<p id="name" style="display: none;">{{flightName}}</p>
+<p id="date" style="display: none;">{{flightDate}}</p>
+<p id="type" style="display: none;">{{flightType}}</p>
+<p id="short" style="display: none;">{{flightShort}}</p>
+<p></p>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+var username = ""
+var inc = 0;
+window.addEventListener('message', (info) => {
+	inc++
+	if (inc === 1) {
+	console.log(info.data)
+	sessionStorage.setItem('checked-username', info.data)
+	} else {
+
+	}
+}, false)
+
+window.parent.postMessage({
+	command: "getInfo-confirm-check"
+}, 'https://flyaceairline.weebly.com')
+
+var data = {
+	flightName: document.getElementById('name').textContent,
+	flightDate: document.getElementById('date').textContent,
+	flightType: document.getElementById('type').textContent,
+	flightShort: document.getElementById('short').textContent,
+	checked: "false"
+}
+
+function approveCheck() {
+	console.log(data)
+	console.log(username)
+	axios.get('https://ace-app.aceairlines.repl.co/connect?query=modify-user&user=' + sessionStorage.getItem('checked-username') + '&data=' + JSON.stringify(data))
+	// window.location = '/check-in-Info'
+}
+</script>
+</html>

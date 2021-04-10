@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html style="overflow: hidden">
+	<head>
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+		<style>
+			input[type='radio']:after {
+				width: 15px;
+				height: 15px;
+				border-radius: 15px;
+				top: -2px;
+				left: -1px;
+				position: relative;
+				background-color: #d1d3d1;
+				content: '';
+				display: inline-block;
+				visibility: visible;
+				border: 2px solid white;
+				transition: transform .2s;
+				transform: scale(0);
+			}
+
+			input[type='radio']:checked:after {
+				width: 15px;
+				height: 15px;
+				border-radius: 15px;
+				top: -2px;
+				left: -1px;
+				position: relative;
+				background-color: #e60f0f;
+				content: '';
+				display: inline-block;
+				visibility: visible;
+				border: 2px solid white;
+				transition: transform .2s;
+				transform: scale(1);
+			}
+
+			.checkbox {
+				position: relative;
+			}
+
+			.checkbox input[type="checkbox"] {
+				width: auto;
+				opacity: 0.00000001;
+				position: absolute;
+				left: 0;
+				margin-left: -20px;
+			}
+
+			.checkbox label {
+				position: relative;
+			}
+
+			.checkbox label:before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				margin: 4px;
+				width: 13px;
+				height: 13px;
+				transition: transform 0.28s ease;
+				border-radius: 3px;
+				border: 2px solid #e60f0f
+			}
+
+			.checkbox label:after {
+				content: '';
+				display: block;
+				width: 7px;
+				height: 3px;
+				border-bottom: 2px solid #e60f0f;
+				border-left: 2px solid #e60f0f;
+				-webkit-transform: rotate(-45deg) scale(0);
+				transform: rotate(-45deg) scale(0);
+				transition: transform ease 0.25s;
+				will-change: transform;
+				position: absolute;
+				top: 10px;
+				left: 8px;
+			}
+
+			.checkbox input[type="checkbox"]:checked ~ label::before {
+				color: #e60f0f;
+			}
+
+			.checkbox input[type="checkbox"]:checked ~ label::after {
+				-webkit-transform: rotate(-45deg) scale(1);
+				transform: rotate(-45deg) scale(1);
+			}
+
+			.checkbox label {
+				min-height: 34px;
+				display: block;
+				padding-left: 40px;
+				margin-bottom: 0;
+				font-weight: normal;
+				cursor: pointer;
+			}
+
+			.checkbox label span {
+				position: absolute;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+			}
+
+			.checkbox input[type="checkbox"]:focus + label::before {
+				outline: 0;
+			}
+
+			input[type=submit]:hover {
+				background-color: #cf0c0c;
+				transition: all .5s;
+			}
+
+			input[type=submit] {
+				background-color: #e60f0f;
+				transition: all .5s;
+			}
+
+			input[type=button]:hover {
+				background-color: #cf0c0c;
+				transition: all .5s;
+			}
+
+			input[type=button] {
+				background-color: #e60f0f;
+				transition: all .5s;
+			}
+
+			button:hover {
+				background-color: #cf0c0c;
+				transition: all .5s;
+			}
+
+			button {
+				background-color: #e60f0f;
+				transition: all .5s;
+			}
+
+			input:hover {
+				border: none; 
+				border-bottom: 2px solid; 
+				border-radius: 5px;
+				border-color: #8ca1ff;
+				color: #8ca1ff;
+				transition: all .5s;
+			}
+
+			input {
+				border: none; 
+				border-bottom: 2px solid; 
+				border-radius: 5px;
+				transition: all .5s;
+				border-color: #e60f0f;
+				color: #e60f0f;
+			}
+
+			input[type=date]:hover {
+				border: none; 
+				border-bottom: 2px solid; 
+				border-radius: 5px;
+				transition: all .5s;
+				border-color: #8ca1ff;
+				color: #8ca1ff;
+			}
+
+			input[type=date] {
+				border: none; 
+				border-bottom: 2px solid; 
+				border-radius: 5px;
+				border-color: #e60f0f;
+				transition: all .5s;
+				color: #e60f0f;
+			}
+
+			select:hover {
+				border: none; 
+				border-bottom: 2px solid; 
+				border-radius: 5px;
+				border-color: #8ca1ff;
+				transition: all .5s;
+				color: #8ca1ff;
+			}
+
+			select {
+				border: none; 
+				border-bottom: 2px solid; 
+				border-radius: 5px;
+				transition: all .5s;
+				border-color: #e60f0f;
+				color: #e60f0f;
+			}
+
+			.return:hover {
+				background-color: #c9c9c9;
+				transition: all .5s;
+			}
+
+			.return {
+				background-color: #e0e0e0;
+				transition: all .5s;
+			}
+
+			@keyframes fadeOut{
+				0%{
+					font-size: 23px;
+					top: calc(50% - 20px);
+					color: #e60f0f;
+				}
+				100%{
+					font-size: 15px;
+					top: -10px;
+					color: #8ca1ff;
+				}
+			}
+
+			@keyframes fadeIn{
+				0%{
+					font-size: 15px;
+					top: -10px;
+					color: #8ca1ff;
+				}
+				100%{
+					font-size: 23px;
+					top: calc(50% - 20px);
+					color: #e60f0f;
+				}
+			}
+
+			::-webkit-scrollbar {
+				width: 10px;
+			}
+
+			::-webkit-scrollbar-track {
+				background: #f1f1f1; 
+			}
+
+			::-webkit-scrollbar-thumb {
+				background: #bfbfbf; 
+			}
+
+			::-webkit-scrollbar-thumb:hover {
+				background: #a1a1a1; 
+			}
+			
+		</style>
+	</head>
+	<body style="outline: none; margin: 0px; user-select: none; outline: none;">
+		<div style="width: 100vw; height: 100vh; overflow: hidden;">
+			<div style="width: 100%; height: 50px; background-color: transparent;">
+			<button style="border-top-left-radius: 10px; width: 25%; height: 100%; font-family: open sans; color: #7E7E7E; background-color: white; border: none; outline: none;">Book</button><!--
+			--><button style="width: 25%; height: 100%; font-family: open sans; color: #7E7E7E; background-color: #AAAAAA; border: none; outline: none; border-right: 1px solid white;">Flight status</button><!--
+			--><button style="width: 25%; height: 100%; font-family: open sans; background-color: #AAAAAA; outline: none; border: none; color: #7E7E7E; border-right: 1px solid white;">Check-in</button><!--
+			--><button style="outline: none; border: none; color: #7E7E7E; background-color: #AAAAAA; border-right: 1px solid white; width: 25%; height: 100%; font-family: open sans; border-top-right-radius: 10px;">My Flights</button>
+			</div>
+			<div id="contents" style="width: 100%; height: calc(100% - 50px); border: 1px solid white; background-color: white;">
+				<form id="bookForm" method="POST" action="/book" style="width: 100%; height: 20px; text-align: center; margin-top: 20px;">
+					<input id="roundtrip" type="radio" style="width: 15px; height: 15px; " name="trip-type" value="roundtrip" checked required>
+					<label required id="roundtrip-label" for="roundtrip" style="margin-right: 50px; font-family: open sans;">Roundtrip</label>
+					<input id="oneway" type="radio" style="width: 15px; height: 15px; " name="trip-type" value="oneway" required>
+					<label id="oneway-label" for="oneway" style="margin-right: 50px; font-family: open sans;">One Way</label>
+					<div style="display: inline-block;" class="checkbox">
+						<input type="checkbox" id="checkbox" name="usemiles" value="Yes">
+						<label for="checkbox" style="font-family: open sans;">Use Miles</label>
+					</div>
+					<center>
+						<div style="width: 90%; height: auto; margin-top: 20px; text-align: center; position: relative; padding-top: 15px;">
+								<div style="width: 100%; height: 50px; text-align: left; position: relative">
+									<!--Departure Airport-->
+									<div style="position: relative; float: left; width: calc(50% - 25px);">
+										<input value="Huntsville" id="departInput" name="depart" type="input" onmouseover="animateDepart()" onmouseout="animateDepartOut()" style="outline: none; background-color: transparent; padding: 10px; margin-left: 30px; font-family: open sans; font-size: 27px; float: right; width: calc(100% - 20px); position: relative; z-index: 100;">
+										<span id="depart" style="background-color: transparent; position: absolute; top: calc(50% - 15px); height: 45px; margin: 0; left: 10px; font-size: 23px; font-family: open sans; color: #e60f0f;">Departure Airport</span>
+									</div>
+									<img src="statusplane.png" style="width: 35px; position: absolute; left: 50%; margin-left: -15px; margin-top: 15px;">
+									<!--Arrival Airport-->
+									<div style="position: relative; float: right; width: calc(50% - 25px);">
+										<input required value="Atlanta" id="arrival_airport" name="arrive" type="input" onmouseover="animateArrive()" onmouseout="animateArriveOut()" style="outline: none; background-color: transparent; padding: 10px; margin-left: 30px; font-family: open sans; font-size: 27px; float: right; width: calc(100% - 20px); position: relative; z-index: 100;">
+										<span id="arrive" style="background-color: transparent; position: absolute; top: calc(50% - 15px); height: 45px; margin: 0; left: 10px; font-size: 23px; font-family: open sans; color: #e60f0f;">Arrival Airport</span>
+									</div>
+								</div>
+							</center>
+							<center>
+								<div style="width: 90%; height: 50px; text-align: left; margin-top: 30px;">
+									<input required type="date" value="2021-10-10" name="depart-date" class="destination" id="departure_date_input" style="outline: none; padding: 10px; font-family: open sans; font-size: 25.5px; float: left; width: calc(50% - 30px);">
+									<input required type="date" value="2021-10-10" name="arrive-date" class="destination" id="arrival_date_input" style="outline: none; padding: 10px; font-family: open sans; font-size: 25.5px; width: calc(50% - 30px); float: right;">
+								</div>
+							</center>
+							<center>
+								<div style="width: 90%; height: 50px; text-align: left; margin-top: 30px;">
+									<select id="programType" name="program-type" required style="outline: none; padding: 10px; font-family: open sans; font-size: 25.5px; float: left; width: calc(50% - 10px);">
+										<option>Economy</option>
+										<option>Business</option>
+									</select>
+									<!--Number of People-->
+									<div style="position: relative; float: right; width: calc(50% - 10px);">
+										<input max="120" min="1" value="2" name="persons" id="peopleInput" name="people" type="number" onmouseover="animatePeople()" onmouseout="animatePeopleOut()" style="outline: none; background-color: transparent; padding: 10px; margin-left: 30px; font-family: open sans; font-size: 27px; float: right; width: calc(100% - 20px); position: relative; z-index: 100;">
+										<span id="people" style="background-color: transparent; position: absolute; top: calc(50% - 15px); height: 45px; margin: 0; left: 10px; font-size: 23px; font-family: open sans; color: #e60f0f;"># of Passengers</span>
+									</div>
+								</div>
+								<button type="submit" id="submit" style="position: absolute; left: calc(50% - 100px); width: 200px; height: 40px; border-radius: 7px; border: none; margin-top: 60px; color: white; font-family: open sans;outline: none;">Book A Flight</button>
+							</center>
+						</div>
+					</center>
+				</form>
+			</div>
+		</div>
+		<div data-info="Error" id="errHandle" style="display: none; background-color: rgba(0, 0, 0, 0.7); position: fixed; top: 0; left: 0; height: 100vh; width: 100vw; z-index: 100;">
+			<div style="width: 50%; height: 200px; background-color: white;border-radius: 30px; position: absolute; top: calc(50% - 100px); left: 25%;">
+				<p style="padding-top: 17px; padding-bottom: 17px; border-top-left-radius: 30px; border-top-right-radius: 30px; background-color: #e60f0f; width: calc(100% - 30px); margin: 0px; color: white; font-family: open sans; padding-left: 30px;">So...this is a little awkward.</p>
+				<p style="font-family: open sans; color: #1a1a1a; padding-left: 30px; padding-right: 30px;">It looks like we ran into a problem. Please click the "return" button so we can fix it for you. You can contact support with this code: 0x400.</p>
+				<button class="return" onclick="parent.location = '/'" style="padding: 10px; padding-left: 40px; padding-right: 40px; border-radius: 10px; font-family: open sans; border: none; margin-left: 30px;">Return</button>
+			</div>
+		</div>
+	</body>
+	<script>
+
+	//Depart
+	function animateDepart() {
+		document.getElementById('depart').style.animation = "fadeOut 0.4s forwards"
+	}
+
+	function animateDepartOut() {
+		if (document.getElementById('departInput').value === "") {
+			document.getElementById('depart').style.animation = "fadeIn 0.4s forwards"
+		} else { }
+	}
+
+	animateDepart()
+
+	//Arrival
+	function animateArrive() {
+		document.getElementById('arrive').style.animation = "fadeOut 0.4s forwards"
+	}
+
+	function animateArriveOut() {
+		if (document.getElementById('arrival_airport').value === "") {
+			document.getElementById('arrive').style.animation = "fadeIn 0.4s forwards"
+		} else { }
+	}
+
+	//People
+	function animatePeople() {
+		document.getElementById('people').style.animation = "fadeOut 0.4s forwards"
+	}
+
+	function animatePeopleOut() {
+		if (document.getElementById('peopleInput').value === "") {
+			document.getElementById('people').style.animation = "fadeIn 0.4s forwards"
+		} else { }
+	}
+
+	if (document.getElementById('arrival_airport').value !== "") {
+		animateArrive()
+	} else if (document.getElementById('peopleInput').value !== "") {
+		animatePeople()
+	}
+
+	</script>
+</html>

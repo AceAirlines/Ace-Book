@@ -1,0 +1,21 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tower, we have a problem.</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700;900&display=swap" rel="stylesheet">
+    </head>
+    <body style="background-color: #e6e6e6">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; border-radius: 20px; box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.1); width: 500px; height: fit-content;">
+            <p style="width: auto; height: fit-content; border-top-left-radius: 20px; border-top-right-radius: 20px; color: white; background-color: #e60f0f; margin: 0px; padding: 20px; font-family: roboto; font-weight: 700; font-size: 18px;">Well, this is awkward.</p>
+            <% if (errorType === 'session') { %>
+                <p style="margin: 0px; font-family: roboto; margin: 20px; font-size: 16px; margin-bottom: 0px;">Looks like you've been inactive for a while, and we just need to make sure you're still there. Please select the log in button at the bottom to continue booking with Ace Airlines!</p>
+            <% } else if (errorType === 'internal') { %>
+                <p style="margin: 0px; font-family: roboto; margin: 20px; font-size: 16px; margin-bottom: 0px;">It looks like you tried to go to a place where you wern't allowed to go...shame on you! Haha, just kidding. Probably a simple misunderstanding...anyways, please click the login button below so we can make sure you get to where you need to go! Thanks for flying Ace, and we hope you have a great flight.</p>
+            <% } %>
+            <button style="margin: 20px; padding: 12px 20px; font-family: roboto; box-shadow: 0 0 10px 5px #e60f0f28; color: white; border-radius: 7px; background-color: #e60f0f; border: none" onclick="window.location='/'">Return to Login</button>
+        </div>
+    </body>
+</html>

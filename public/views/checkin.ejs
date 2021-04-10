@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+    input[type=submit]:hover {
+    background-color: #cf0c0c;
+    transition: all .5s;
+    }
+    input[type=submit] {
+    background-color: #e60f0f;
+    transition: all .5s;
+    }
+    input[type=button]:hover {
+    background-color: #cf0c0c;
+    transition: all .5s;
+    }
+    input[type=button] {
+    background-color: #e60f0f;
+    transition: all .5s;
+    }
+    button:hover {
+    background-color: #cf0c0c;
+    transition: all .5s;
+    }
+    button {
+    background-color: #e60f0f;
+    transition: all .5s;
+    }
+    input:hover {
+    border: none; 
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    border-color: #8ca1ff;
+    color: #8ca1ff;
+    transition: all .5s;
+    }
+    input {
+    border: none; 
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    border-color: #e60f0f;
+    transition: all .5s;
+    color: #e60f0f;
+    }
+    input[type=date]:hover {
+    border: none; 
+    border-bottom: 2px solid; 
+    transition: all .5s;
+    border-radius: 5px;
+    border-color: #8ca1ff;
+    color: #8ca1ff;
+    }
+    input[type=date] {
+      transition: all .5s;
+    border: none; 
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    border-color: #e60f0f;
+    color: #e60f0f;
+    }
+    select:hover {
+    border: none; 
+    border-bottom: 2px solid; 
+    transition: all .5s;
+    border-radius: 5px;
+    border-color: #8ca1ff;
+    color: #8ca1ff;
+    }
+    select {
+    border: none; 
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    border-color: #e60f0f;
+    transition: all .5s;
+    color: #e60f0f;
+    }
+  
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #bfbfbf; 
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a1a1a1; 
+    }
+
+    @keyframes viewCheck{
+      0%{
+        height: 0px
+      }
+      100%{
+        height: 60px
+      }
+    }
+
+    @keyframes NoviewCheck{
+      0%{
+        height: 60px
+      }
+      100%{
+        height: 0px
+      }
+    }
+    </style>
+  </head>
+  <body style="outline: none; margin: 0px; user-select: none; outline: none;" onload="loadFlights()">
+    <div style="width: 100vw; height: 100vh; overflow: hidden;">
+      <div style="width: 100%; height: 50px; background-color: transparent;">
+        <button onclick="window.location='/home'" style="border-top-left-radius: 10px; width: 25%; height: 100%; font-family: open sans; border: none;outline: none; color: white; border-right: 1px solid white">Book</button><!--
+        --><button onclick="window.location='/flightstatus'" style="width: 25%; height: 100%; font-family: open sans; border: none; color: white; outline: none; border-right: 1px solid white;">Flight status</button><!--
+        --><button onclick="window.location='/checkin'" style="width: 25%; height: 100%; font-family: open sans; outline: none; border: none; background-color: white;border-right: 1px solid white;">Check-in</button><!--
+        --><button onclick="window.location='/myflights'" style="outline: none; border: none; color: white;border-right: 1px solid white; width: 25%; height: 100%; font-family: open sans; border-top-right-radius: 10px;">My Flights</button>
+      </div>
+      <div id="contents" style="overflow: scroll; overflow-x: hidden; width: 100%; height: calc(100% - 50px); border: 1px solid white; background-color: white;">
+        <center>
+          <p style="outline: none; border: none; color: grey; font-family: open sans;">Please Select a Flight to Check In</p>
+          <div style="width: 93%; margin-top: 20px;" id="flights">
+          </div>
+          <div style="width: 93%; margin-top: 10px; height: 60px;">
+          </div>
+        </center>
+      </div>
+    </div>
+    <div id="openBox" style="display: none; animation: viewCheck 0.5s forwards; width: 100vw; height: 60px; background-color: #e60f0f; position: fixed; bottom: 0px; left: 0px;">
+      <div style="width: 250px; height: 40px; position: absolute; left: 50%; margin-left: -125px; top: 10px;">
+          <button id="viewbutton" style="float: left; height: 100%; width: 100px; border-radius: 15px; border: 2px solid transparent; color: white; font-family: open sans;"></button>
+          <button id="checkin" style="float: right; height: 100%; width: 100px; border-radius: 15px; border: 2px solid white; color: white; font-family: open sans; display: none;">CHECK IN</button>
+      </div>
+      <center>
+      <p id="alreadyChecked" style="position: relative; color: white; font-family: open sans;">You have already checked in</p>
+      </center>
+    </div>
+
+    <!--Alert-->
+    <div id="alertDiv" style="display: none; width: 100vw; height: 100vh; background-color: rgba(255, 255, 255, 0.9); position: fixed; top: 0px; left: 0px; z-index: 1000;">
+      <div style="width: 300px; height: 120px; background-color: white; position: absolute; top: 20px; right: 50%; margin-right: -150px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); border-radius: 5px; top: 50%; margin-top: -115px;">
+        <p style="position: absolute; font-family: Open Sans; top: 3px; right: 15px; color: black; margin: 0px; font-size: 35px;" onclick="document.getElementById('alertDiv').style.display = 'none'">&times;</p>
+        <p style="font-family: Open Sans; font-weight: 600; color: black; position: absolute; top: 30px; left: 20px; font-size: 14px; width: 255px; text-align: center;">Please close the currently open flight. You can do this by clicking on the flight.</p>
+      </div>
+    </div>
+  </body>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+
+    var username = ""
+
+    function process(info) {
+      username = info.data
+      axios.post('/grabInfo', {
+        user: username
+      }).then((response) => {
+        loadFlights(response.data)
+      }).catch((e) => {
+        console.error(e)
+      })
+    }
+
+    window.addEventListener('message', process, false)
+
+    window.parent.postMessage({
+      command: "getInfo-check-in"
+    }, 'https://flyaceairline.weebly.com')
+
+    var box = false
+    var currentId = ""
+  
+    function openFlight(packet, flightId) {
+      console.log(packet)
+      if (box) {
+        if (flightId === currentId) {
+            document.getElementById('openBox').style.animation = "NoviewCheck 0.5s forwards"
+            currentId = ""
+            box = false
+            alreadychecked()
+        } else {
+          document.getElementById('alertDiv').style.display = "block"
+          alreadychecked()
+        }
+      } else {
+        currentId = flightId
+        document.getElementById('openBox').style.animation = "viewCheck 0.5s forwards"
+        alreadychecked()
+        document.getElementById('viewbutton').addEventListener('click', () => {
+          window.location = '/view-your-flight?data=' + JSON.stringify(packet)
+        })
+        document.getElementById('checkin').addEventListener('click', () => {
+          window.location = '/check-your-flight?data=' + JSON.stringify(packet)
+        } )
+        box = true
+        alreadychecked()
+        if (packet.checked === "true") {
+          console.log("CheckIn: true")
+          document.getElementById('openBox').style.display = "block"
+          document.getElementById('checkin').style.display = "none"
+          alreadychecked()
+        } else {
+          console.log("CheckIn: false")
+          document.getElementById('openBox').style.display = "block"
+          document.getElementById('checkin').style.display = "block"
+          alreadychecked()
+        }
+      }
+    }
+
+
+    function loadFlights(data) {
+      console.log(data)
+      var int = 0
+      data.forEach((index) => {
+        int++
+        if (index.username) {
+          console.warn('Username bypassed.')
+        } else {
+          var newFlight = document.createElement('div')
+          newFlight.style.width = "100%"
+          newFlight.style.height = "60px"
+          newFlight.style.borderRadius = "7px"
+          newFlight.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.4)"
+          newFlight.style.marginTop = "20px"
+          newFlight.style.borderLeft = "10px solid #e60f0f"
+          newFlight.style.textAlign = "left"
+          newFlight.style.position = "relative";
+          newId = 'flight' + (document.getElementById('flights').childElementCount + 1)
+          newFlight.id = newId
+          newFlight.addEventListener('click', () => {
+            openFlight({
+              flightName: index.flightName,
+              flightDate: index.flightDate,
+              flightType: index.flightType,
+              flightShort: index.flightShort,
+              checked: index.checkedIn
+            }, newFlight.id)
+          })
+          document.getElementById('flights').appendChild(newFlight)
+
+          var image = document.createElement('img')
+          image.src = "airplaneLogo.png"
+          image.style.margin = "10px"
+          image.style.height = "40px"
+          document.getElementById(newId).appendChild(image)
+
+          var appendName = document.createElement("p")
+          appendName.innerHTML = index.flightName
+          var nameId = newId + '-name'
+          appendName.style.color = "#e60f0f"
+          appendName.style.fontFamily = "Open Sans" 
+          appendName.style.fontWeight = "600" 
+          appendName.style.fontSize = "13px" 
+          appendName.style.marginLeft = "60px" 
+          appendName.style.position = "absolute" 
+          appendName.style.top = "0px" 
+          appendName.style.marginTop = "7px";
+          document.getElementById(newId).appendChild(appendName)
+
+          var appendName2 = document.createElement("p")
+          appendName2.innerHTML = index.flightDate
+          appendName2.style.fontFamily = "Open Sans" 
+          appendName2.style.fontWeight = "300" 
+          appendName2.style.fontSize = "13px" 
+          appendName2.style.marginLeft = "60px" 
+          appendName2.style.position = "absolute" 
+          appendName2.style.top = "0px" 
+          appendName2.style.marginTop = "22px";
+          document.getElementById(newId).appendChild(appendName2)
+
+          var appendName3 = document.createElement("p")
+          appendName3.innerHTML = index.flightType
+          appendName3.style.fontFamily = "Open Sans" 
+          appendName3.style.fontWeight = "600" 
+          appendName3.style.fontSize = "13px" 
+          appendName3.style.marginLeft = "60px" 
+          appendName3.style.position = "absolute" 
+          appendName3.style.top = "0px" 
+          appendName3.style.marginTop = "37px";
+          document.getElementById(newId).appendChild(appendName3)
+        }
+      })
+    }
+
+    function alreadychecked() {
+      if (document.getElementById('checkin').style.display === "block") {
+          document.getElementById('alreadyChecked').style.display = "none"
+                console.warn('none')
+      }
+      else {
+          document.getElementById('alreadyChecked').style.display = "block"
+                console.warn('block')
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html style="overflow: hidden">
+  <head>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+    input[type=submit]:hover {
+    background-color: #cf0c0c;
+    transition: all .5s;
+    }
+    input[type=submit] {
+    background-color: #e60f0f;
+    transition: all .5s;
+    }
+    input[type=button]:hover {
+    background-color: #cf0c0c;
+    transition: all .5s;
+    }
+    input[type=button] {
+      transition: all .5s;
+    background-color: #e60f0f;
+    }
+    button:hover {
+    background-color: #cf0c0c;
+    transition: all .5s;
+    }
+    button {
+    background-color: #e60f0f;
+    transition: all .5s;
+    }
+
+    input:hover {
+    border: none; 
+    transition: all .5s;
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    border-color: #8ca1ff;
+    color: #8ca1ff;
+    }
+
+    input {
+    border: none; 
+    border-bottom: 2px solid;
+    transition: all .5s;
+    border-radius: 5px;
+    border-color: #e60f0f;
+    color: #e60f0f;
+    }
+    
+    input[type=date]:hover {
+    border: none; 
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    transition: all .5s;
+    border-color: #8ca1ff;
+    color: #8ca1ff;
+    }
+    input[type=date] {
+    border: none; 
+    transition: all .5s;
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    border-color: #e60f0f;
+    color: #e60f0f;
+    }
+    select:hover {
+    border: none; 
+    transition: all .5s;
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    border-color: #8ca1ff;
+    color: #8ca1ff;
+    }
+    button:hover {
+    width: 180px; 
+    transition: all .5s;
+    height: 55px;
+    }
+    button {
+    width: 175px; 
+    height: 50px;
+    transition: all .5s;
+    }
+
+    @keyframes fadeOut{
+      0%{
+        font-size: 27px;
+        top: calc(50% - 20px);
+        color: #e60f0f;
+      }
+      100%{
+        font-size: 15px;
+        top: -10px;
+        color: #8ca1ff;
+      }
+    }
+
+    @keyframes fadeIn{
+      0%{
+        font-size: 15px;
+        top: -10px;
+        color: #8ca1ff;
+      }
+      100%{
+        font-size: 27px;
+        top: calc(50% - 20px);
+        color: #e60f0f;
+      }
+    }
+
+    @keyframes out{
+      0%{
+        color: blue;
+        font-size: 30px;
+      }
+      100%{
+        color: black;
+        font-size: 18px;
+      }
+    }
+    select {
+    border: none; 
+    border-bottom: 2px solid; 
+    border-radius: 5px;
+    border-color: #e60f0f;
+    color: #e60f0f;
+    }
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #bfbfbf; 
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a1a1a1; 
+    }
+    </style>
+  </head>
+  <body style="outline: none; margin: 0px; user-select: none; outline: none;">
+    <div style="width: 100vw; height: 100vh; overflow: hidden;">
+      <div style="width: 100%; height: 50px; background-color: transparent;">
+        <button onclick="window.location='/book-a-flight'" style="border-top-left-radius: 10px; width: 25%; height: 100%; font-family: open sans; border: none;outline: none; color: white; border-right: 1px solid white">Book</button><!--
+        --><button onclick="window.location='/flightstatus'" style="width: 25%; height: 100%; font-family: open sans; border: none; color: white; outline: none; border-right: 1px solid white;">Flight status</button><!--
+        --><button onclick="window.location='/checkin'" style="width: 25%; height: 100%; font-family: open sans; outline: none; border: none; background-color: white;border-right: 1px solid white;">Check-in</button><!--
+        --><button onclick="window.location='/my-flights'" style="outline: none; border: none; color: white;border-right: 1px solid white; width: 25%; height: 100%; font-family: open sans; border-top-right-radius: 10px;">My Flights</button>
+      </div>
+      <div id="contents" style="text-align: center; width: 100%; height: calc(100% - 50px); border: 1px solid white; background-color: white;">
+
+        <center>   
+    <div style="width: 90%; height: 400px; position: absolute; top: 50%; margin-top: -180px; left: 5%;">
+      <p style="font-family: Open Sans; color: #e60f0f; font-size: 25px; margin-top: 30px; margin-bottom: 5px;text">Thank You for Flying</p>
+      <i style="font-family: Open Sans; color: #e60f0f; font-size: 45px; text">Ace Airlines</i>
+      <p style="font-family: Open Sans; color: #e60f0f; font-size: 17px; margin-top: 50px; text">You have successfully checked in.</p>
+      <p style="padding-bottom: 40px; font-family: Open Sans; color: #e60f0f; font-size: 20px; margin-top: 20px; text">Enjoy Your Flight!</p>
+      <button onclick="viewFlight()" style="font-family: Open Sans; border: 2px solid red; border-radius: 10px; margin-top: 15px; background-color: transparent; font-family: Open Sans; color: #e60f0f;">PRINT BOARDING PASS</button>
+    </div>
+        </center>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+      function viewFlight() {
+        
+      }
+  </script>
+</html>
