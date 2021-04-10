@@ -117,7 +117,7 @@
 				if (xhr.readyState === 4 && xhr.status === 200) {
 					if (JSON.parse(xhr.responseText).post === 'successful') {
 						alert('Successfully booked!')
-						window.location = "/home"
+						window.parent.location = "https://flyaceairline.weebly.com"
 					}
 				}
 			}

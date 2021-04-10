@@ -13,21 +13,26 @@ app.set('view engine', 'ejs')
 app.set('views', 'public/views')
 
 /* Render static routing */
-app.get('/', (req, res) => { res.render('login') })
+app.get('/', (req, res) => { 
+	/* Checking to see if the user is logged in and the session has not expired. */
+	new Security().verifyUserTokenAsync(req.sessionID).then(() => {
+		res.redirect('/home')
+	}).catch((e) => { res.render('login') })
+})
 app.get('/home', async (req, res) => { 
 	new Security().verifyUserTokenAsync(req.sessionID).then(() => {
 		res.render('book')
-	}).catch((e) => { console.log(e); res.render('404', { errorType: 'internal' }) })
+	}).catch((e) => { res.render('404', { errorType: 'internal' }) })
 })
 app.get('/checkin', async (req, res) => { 
 	new Security().verifyUserTokenAsync(req.sessionID).then(() => {
 		res.render('checkin')
-	}).catch((e) => { console.log(e); res.render('404', { errorType: 'internal' }) })
+	}).catch((e) => { res.render('404', { errorType: 'internal' }) })
 })
 app.get('/myflights', async (req, res) => {
 	new Security().verifyUserTokenAsync(req.sessionID).then(() => {
 		res.render('myflights')
-	}).catch((e) => { console.log(e); res.render('404', { errorType: 'internal' }) })
+	}).catch((e) => { res.render('404', { errorType: 'internal' }) })
 })
 
 /* Authenticate with auth0 through app request */
@@ -70,14 +75,14 @@ app.post('/book', (req, res) => {
 				sessionComponent.set({ routetemp: { suggested: filteredArrivals, inputted: req.body }})
 				res.redirect('https://flyaceairline.weebly.com/complete-flight')
 			})
-	}).catch((e) => { console.log(e); res.render('404', { errorType: 'internal' }) })
+	}).catch((e) => { res.render('404', { errorType: 'internal' }) })
 })
 
 /* Compare your flight options */
 app.get('/compare', (req, res) => { 
 	new Security().verifyUserTokenAsync(req.sessionID).then((sessionComponent) => {
 		res.render('compareFlight', sessionComponent.get('routetemp'))
-	}).catch((e) => { console.log(e); res.render('404', { errorType: 'internal' }) })
+	}).catch((e) => { res.render('404', { errorType: 'internal' }) })
 })
 
 /* Configure final POST route to push destination */
@@ -98,7 +103,7 @@ app.post('/request', (req, res) => {
 			}).catch(() => {
 				res.render('404', { errorType: 'internal'})
 			})
-	}).catch((e) => { console.log(e); res.render('404', { errorType: 'internal' }) })
+	}).catch((e) => { res.render('404', { errorType: 'internal' }) })
 })
 
 /* Basic port listener */
