@@ -276,15 +276,15 @@
 									<img src="statusplane.png" style="width: 35px; position: absolute; left: 50%; margin-left: -15px; margin-top: 15px;">
 									<!--Arrival Airport-->
 									<div style="position: relative; float: right; width: calc(50% - 25px);">
-										<input required value="Atlanta" id="arrival_airport" name="arrive" type="input" onmouseover="animateArrive()" onmouseout="animateArriveOut()" style="outline: none; background-color: transparent; padding: 10px; margin-left: 30px; font-family: open sans; font-size: 27px; float: right; width: calc(100% - 20px); position: relative; z-index: 100;">
+										<input required id="arrival_airport" name="arrive" type="input" onmouseover="animateArrive()" onmouseout="animateArriveOut()" style="outline: none; background-color: transparent; padding: 10px; margin-left: 30px; font-family: open sans; font-size: 27px; float: right; width: calc(100% - 20px); position: relative; z-index: 100;">
 										<span id="arrive" style="background-color: transparent; position: absolute; top: calc(50% - 15px); height: 45px; margin: 0; left: 10px; font-size: 23px; font-family: open sans; color: #e60f0f;">Arrival Airport</span>
 									</div>
 								</div>
 							</center>
 							<center>
 								<div style="width: 90%; height: 50px; text-align: left; margin-top: 30px;">
-									<input required type="date" value="2021-10-10" name="depart-date" class="destination" id="departure_date_input" style="outline: none; padding: 10px; font-family: open sans; font-size: 25.5px; float: left; width: calc(50% - 30px);">
-									<input required type="date" value="2021-10-10" name="arrive-date" class="destination" id="arrival_date_input" style="outline: none; padding: 10px; font-family: open sans; font-size: 25.5px; width: calc(50% - 30px); float: right;">
+									<input required type="date" name="depart-date" class="destination" id="departure_date_input" style="outline: none; padding: 10px; font-family: open sans; font-size: 25.5px; float: left; width: calc(50% - 30px);">
+									<input required type="date" name="arrive-date" class="destination" id="arrival_date_input" style="outline: none; padding: 10px; font-family: open sans; font-size: 25.5px; width: calc(50% - 30px); float: right;">
 								</div>
 							</center>
 							<center>
@@ -295,7 +295,7 @@
 									</select>
 									<!--Number of People-->
 									<div style="position: relative; float: right; width: calc(50% - 10px);">
-										<input max="120" min="1" value="2" name="persons" id="peopleInput" name="people" type="number" onmouseover="animatePeople()" onmouseout="animatePeopleOut()" style="outline: none; background-color: transparent; padding: 10px; margin-left: 30px; font-family: open sans; font-size: 27px; float: right; width: calc(100% - 20px); position: relative; z-index: 100;">
+										<input max="120" min="1" name="persons" id="peopleInput" name="people" type="number" onmouseover="animatePeople()" onmouseout="animatePeopleOut()" style="outline: none; background-color: transparent; padding: 10px; margin-left: 30px; font-family: open sans; font-size: 27px; float: right; width: calc(100% - 20px); position: relative; z-index: 100;">
 										<span id="people" style="background-color: transparent; position: absolute; top: calc(50% - 15px); height: 45px; margin: 0; left: 10px; font-size: 23px; font-family: open sans; color: #e60f0f;"># of Passengers</span>
 									</div>
 								</div>

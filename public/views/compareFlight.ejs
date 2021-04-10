@@ -47,6 +47,7 @@
 					</div>
 					<div id="info_wrapper" style="margin-top: 20px;">
 						<p id="arrival" style="border-left: 1.5px solid #e60f0f; padding-left: 10px; font-family: open sans; color: black;">Departure:<br><span id="flightName" style="color: #e60f0f;"><%= inputted.depart %></span></p>
+						<p id="type" style="border-left: 1.5px solid #e60f0f; padding-left: 10px; font-family: open sans; color: black;">Arrival:<br><span id="flightArr" style="color: #e60f0f;"><%= inputted.arrive %></span></p>
 						<p id="date" style="border-left: 1.5px solid #e60f0f; padding-left: 10px; font-family: open sans; color: black;">Expected Depature Date/Time:<br><span id="flightDate" style="color: #e60f0f;"><%= inputted['arrive-date'] %></span></p>
 						<p id="type" style="border-left: 1.5px solid #e60f0f; padding-left: 10px; font-family: open sans; color: black;">Type of flight:<br><span id="flightType" style="color: #e60f0f;"><%= inputted['trip-type'] %></span></p>
 					</div>
@@ -55,8 +56,8 @@
 						<button id="continue" style="padding: 10px; font-size: 12px; border-radius: 10px; border: 1px solid; color: white; background-color: #e60f0f; font-family: open sans; float: right;">Continue →</button>
 					</div>
 				</div>
-				<div id="wrapper-2" style="opacity: 0; animation: extendContent 1s forwards; display: none; height: 300px; width: 350px; text-align: left; float: right;">
-					<p id="personalized" style="width: calc(100% - 40px); margin: 0px; padding: 20px; font-family: open sans; color: #FFFFFF; background-color: #e60f0f; margin-bottom: 0px;">Please select a flight.</p>
+				<div id="wrapper-2" style="opacity: 0; animation: extendContent 1s forwards; display: none; height: 370px; width: 350px; text-align: left; float: right;">
+					<p id="personalized" style="width: calc(100% - 40px); margin: 0px; padding: 20px; border-radius: 5px; font-family: open sans; color: #FFFFFF; background-color: #e60f0f; margin-bottom: 0px;">Please select a flight.</p>
 					<div id="destinationLoad" style="width: calc(100% - 30px); height: calc(100% - 94px); overflow-y: scroll; padding: 15px; overflow-x: hidden;">
 						<% if (suggested.length != 0) { %>
 							<p style="font-family: open sans; font-size: 20px; font-weight: 600; margin-top: 0px;">Top Result</p>
