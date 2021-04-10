@@ -5,12 +5,14 @@ const Security = require(path.join(__dirname, '/lib/security/security.js'))
 const cookieParser = require('cookie-parser')
 const fs = require('fs')
 const axios = require('axios')
+const { ppid } = require('process')
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, "/public/static")))
 app.set('view engine', 'ejs')
 app.set('views', 'public/views')
+app.use(express.json())
 
 /* Render static routing */
 app.get('/', (req, res) => { 
@@ -73,7 +75,7 @@ app.post('/book', (req, res) => {
 				} else { }
 				req.body['trip-type'] = tripType
 				sessionComponent.set({ routetemp: { suggested: filteredArrivals, inputted: req.body }})
-				res.redirect('https://flyaceairline.weebly.com/complete-flight')
+				res.send({ book: true })
 			})
 	}).catch((e) => { res.render('404', { errorType: 'internal' }) })
 })

@@ -2,6 +2,7 @@
 <html style="overflow: hidden">
 	<head>
 		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 		<style>
 			input[type='radio']:after {
 				width: 15px;
@@ -256,7 +257,7 @@
 			--><button style="outline: none; border: none; color: #7E7E7E; background-color: #AAAAAA; border-right: 1px solid white; width: 25%; height: 100%; font-family: open sans; border-top-right-radius: 10px;">My Flights</button>
 			</div>
 			<div id="contents" style="width: 100%; height: calc(100% - 50px); border: 1px solid white; background-color: white;">
-				<form id="bookForm" method="POST" action="/book" style="width: 100%; height: 20px; text-align: center; margin-top: 20px;">
+				<form id="bookForm" style="width: 100%; height: 20px; text-align: center; margin-top: 20px;">
 					<input id="roundtrip" type="radio" style="width: 15px; height: 15px; " name="trip-type" value="roundtrip" checked required>
 					<label required id="roundtrip-label" for="roundtrip" style="margin-right: 50px; font-family: open sans;">Roundtrip</label>
 					<input id="oneway" type="radio" style="width: 15px; height: 15px; " name="trip-type" value="oneway" required>
@@ -356,6 +357,21 @@
 	} else if (document.getElementById('peopleInput').value !== "") {
 		animatePeople()
 	}
+
+	// BAD Form Submit Method
+	document.getElementById('bookForm').addEventListener('submit', (e) => {
+		e.preventDefault()
+		axios.post('/book', {
+			"trip-type": document.getElementById('roundtrip').value,
+			"depart": document.getElementById('departInput').value,
+			"arrive": document.getElementById('arrival_airport').value,
+			"depart-date": document.getElementById('departure_date_input').value,
+			"arrive-date": document.getElementById('arrival_date_input').value,
+			"program-type": document.getElementById('programType').value
+		}).then((response) => {
+			window.parent.location = "/compare"
+		})	
+	})
 
 	</script>
 </html>
