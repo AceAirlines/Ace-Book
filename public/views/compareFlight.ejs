@@ -116,7 +116,7 @@
 			xhr.onreadystatechange = () => {
 				if (xhr.readyState === 4 && xhr.status === 200) {
 					if (JSON.parse(xhr.responseText).post === 'successful') {
-						window.parent.location = "https://flyaceairline.weebly.com"
+						window.parent.location = "https://flyaceairline.weebly.com/bookingComplete"
 					}
 				}
 			}

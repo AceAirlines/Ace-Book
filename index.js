@@ -5,7 +5,6 @@ const Security = require(path.join(__dirname, '/lib/security/security.js'))
 const cookieParser = require('cookie-parser')
 const fs = require('fs')
 const axios = require('axios')
-const { ppid } = require('process')
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -109,6 +108,6 @@ app.post('/request', (req, res) => {
 })
 
 /* Basic port listener */
-app.listen(3000, () => {
-	console.log('Listening::3000')
+app.listen(process.env.PORT, () => {
+	console.log(`Listening::REPLPORT`)
 })
